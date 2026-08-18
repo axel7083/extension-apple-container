@@ -25,6 +25,7 @@ COPY pnpm-lock.yaml /opt/app-root/extension-source/
 COPY *.png /opt/app-root/extension-source/
 COPY .gitignore /opt/app-root/extension-source/
 COPY *.json /opt/app-root/extension-source/
+COPY pnpm-workspace.yaml /opt/app-root/extension-source/
 COPY src /opt/app-root/extension-source/src
 COPY scripts /opt/app-root/extension-source/scripts
 COPY types /opt/app-root/extension-source/types
@@ -32,7 +33,7 @@ COPY vite*.ts /opt/app-root/extension-source/
 
 # refresh dependencies (if needed)
 # and build the extension
-RUN pnpm install && \
+RUN CI=true pnpm install && \
     pnpm download-dependencies && \
     pnpm build
 
